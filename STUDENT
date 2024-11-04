@@ -1,0 +1,34 @@
+class Student:
+    name = input("Enter name: ")
+    age = 14
+    grade = 8
+    classTeacher = "Pêra"
+
+    # another func to show details
+    def show_Details(self):
+        print('The details of the students are : ')
+        print(f'Name = {self.name}')
+        print(f"Age = {self.age}")
+        print(f"Grade = {self.grade}")
+        print(f"classTeacher = {self.classTeacher}")
+    
+    def change_Details(self):
+        print("Please update your age: ")
+        self.age = int(input())
+        print("Please update the name of the student: ")
+        self.name = input()
+
+#Get the age
+print("Age = ",Student.age)
+#Get the class Teacher
+print("Class Teacher = ",Student.classTeacher)
+
+# creating object of class student
+student1 = Student()
+print() # to leave a blank line
+student1.show_Details()
+print('\n')
+
+student1.change_Details()
+print('\n')
+student1.show_Details()
