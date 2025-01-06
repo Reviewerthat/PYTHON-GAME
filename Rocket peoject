@@ -1,0 +1,56 @@
+import pygame
+from pygame.locals import *
+from time import *
+pygame.init()
+screen = pygame.display.set_mode((500,600))
+
+player_x = 250
+player_y = 300
+
+keys = [False,False,False,False] # [0,1,2,3 ]
+# for [up,left,down,right]
+
+player = pygame.image.load("rocket project\Roc.png")
+
+background = pygame.image.load("rocket project\Sky.png")
+
+while player_y < 600:
+    screen.blit(background,(0,0))
+    screen.blit(player, (player_x, player_y))
+    pygame.display.flip()
+    
+    for event in pygame.event.get():
+        if  event.type ==pygame.QUIT:
+            pygame.quit()
+            
+        # chk if any key is pressed
+        if event.type == pygame.KEYDOWN:
+            if event.key == K_UP:
+                keys[0] = True
+            elif event.key == K_LEFT:
+                keys[1] = True
+            elif event.key == K_DOWN: 
+                keys[2] = True
+            elif event.key == K_RIGHT:
+                keys[3] = True
+
+        # chk if any key is released
+
+        if event.type == pygame.KEYUP:
+            if event.key == K_UP:
+                keys[0] = False
+            elif event.key == K_LEFT:
+                keys[1] = False
+            elif event.key == K_DOWN: 
+                keys[2] = False
+            elif event.key == K_RIGHT:
+                keys[3] = False
+    
+    # if UP key is pressed
+    if keys[0] :
+        if player_y > 0:
+            player_y = player_y - 25
+    # if DOWN key is pressed        
+    if keys[2] :
+        if player_y < 590:
+            player_y = player_y + 25
