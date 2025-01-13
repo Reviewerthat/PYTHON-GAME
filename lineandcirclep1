@@ -1,0 +1,18 @@
+import pygame
+screen = pygame.display.set_mode((600, 400))
+screen.fill((255,255,255))
+pygame.display.update()
+
+run = True
+while run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+    screen.fill((255,255,000))
+    
+    #draw a line
+    start_pos = (300,200)
+    end_pos = (100,50)
+    pygame.draw.line(screen, (255,000,000), start_pos, end_pos, 7)
+    pygame.draw.circle(screen, (0,0,255),(100,200),80,1)
+    pygame.display.update()
