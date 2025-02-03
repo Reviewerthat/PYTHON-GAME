@@ -1,0 +1,82 @@
+import pygame
+import random
+import time
+pygame.init()
+WIDTH = 600
+HEIGHT = 500
+
+def changeBackground(img):
+    background = pygame.image.load(img)
+    bg = pygame.transform.scale(background, (WIDTH,HEIGHT))
+    screen.blit(bg,(0,0))
+
+#TITLE
+pygame.display.set_caption("Recycle Marathon")
+pygame.display.set_mode((WIDTH,HEIGHT))
+
+class Bin(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.image.load("Bin.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (40,60))
+        self.rect = self.image.get_rect()
+
+#recyclable sprite
+class Recyclable(pygame.sprite.Sprite):
+    def __init__(self, img):
+        super().__init__()
+        self.image = pygame.image.load(img).convert_alpha()
+        self.image = pygame.transform.scale(self.image, (30,30))
+        self.rect = self.image.get_rect()
+
+# Non recyclable sprite
+class Non_recyclable(pygame.sprite.Sprite):
+    def __init__(self):
+        super.__init__()
+        self.image = pygame.image.load("bagplas.png").convert_alpha()
+        self.image = pygame.transform.scale(self.image, (40, 40))
+        self.rect = self.image.get_rect()
+
+# List of images for recy.
+images = ["paper.png", "box.png", "pencil.png"]
+
+item_list = pygame.sprite.Group() # grouping the recyclable items
+allsprites = pygame.sprite.Group() # grouping all items
+plastic_list = pygame.sprite.Group() 
+
+
+
+
+
+
+
+
+
+
+# create bin
+bin = Bin()
+allsprites.add(bin)
+
+RED = (225, 0, 0)
+WHITE = (225, 225, 225)
+GREEN = (0, 225, 0)
+BROWN = (150, 75, 0)
+running = True
+score = 0
+clock = pygame.time.Clock()
+start_time = time.time()
+myFont=pygame.font.SysFont("Times New Roman", 22)
+timingFont=pygame.font.SysFont("Times New Roman", 22)
+text = myFont.render("Score="+str(0),True, RED)
+
+
+while running:
+
+    clock.tick(30)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    pygame.display.update()
+
+pygame.quit()
