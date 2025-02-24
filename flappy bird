@@ -1,0 +1,30 @@
+import pygame, random
+pygame.init()
+FPS = 60
+W, H = 700, 450
+WHITE=(255,255,255)
+screen = pygame.display.set_mode((W, H))
+pygame.display.set_caption("Flappy Bird")
+font = pygame.font.SysFont("Bauhaus 93',60")
+#loading images
+BG = pygame.image.load("gamedev/flappybird/img/bg.png")
+GROUND_IMG = pygame.image.load("gamedev/flappybird/img/ground.png")
+RESTART = pygame.image.load("gamedev/flappybird/img/restart.png")
+#game parameters
+#to scroll ground
+GROUND_SCROLL = 0
+SCROLL_SPEED = 5
+FLYING = False
+GAME_OVER = False
+#horizontal gap
+PIPE_GAP = 150
+#time is in miliseconds
+PIPE_FREQ = 1500
+LAST_PIPE = pygame.time.get_ticks()-PIPE_FREQ
+SCORE = 0
+PASSED_PIPE = False
+
+def draw_text(text, font, color,x,y):
+    screen.blit(font.render(text,True,color),(x,y))
+def reset_game():
+    pass
