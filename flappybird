@@ -1,0 +1,75 @@
+import pygame, random
+pygame.init()
+FPS = 60
+W, H = 700, 450
+WHITE=(255,255,255)
+screen = pygame.display.set_mode((W, H))
+pygame.display.set_caption("Flappy Bird").
+font = pygame.font.SysFont("Bauhaus 93',60")
+
+#loading images
+BG = pygame.image.load("gamedev/flappybird/img/bg.png")
+GROUND_IMG = pygame.image.load("gamedev/flappybird/img/ground.png")
+RESTART = pygame.image.load("gamedev/flappybird/img/restart.png")
+
+#game parameters
+#to scroll ground
+GROUND_SCROLL = 0
+SCROLL_SPEED = 5
+FLYING = False
+GAME_OVER = False
+
+#horizontal gap
+PIPE_GAP = 150
+#time is in miliseconds
+PIPE_FREQ = 1500
+LAST_PIPE = pygame.time.get_ticks()-PIPE_FREQ
+SCORE = 0
+PASSED_PIPE = False
+
+def draw_text(text, font, color,x,y):
+    screen.blit(font.render(text,True,color),(x,y))
+def reset_game():
+    pass
+
+
+class Bird(pygame.sprite.Sprite):
+    def __init__(self,x,y):       #constructer to initialize a variable
+        pygame.sprite.Sprite.__init__(self)
+        self.images = [pygame.image.load("gamedev/flappybird/img/bird{i}.png")for i in range(1,4)]
+        self.index = 0
+        self.counter = 0
+        self.image = self.images[self.index]
+        self.rect = self.image.get_rect(center=(x,y))
+        self.vel = 0
+        self.clicked = False
+        
+    def update(self):
+        if FLYING:
+            self.vel = min(self.vel + 0.5, 8)
+            self.rect.y += int(self.vel)
+            
+        if not GAME_OVER:
+            if pygame.mouse.get_pressed()[0] and not self.clicked:
+                self.clicked = True
+                self.vel = -10
+            if not pygame.mouse.get_pressed()[0]:
+                self.clicked = False
+            self.counter += 1
+            if self.counter > 5
+                    self.counter = 0
+                    self.index = (self.index + 1) % len(self.images)         #create a cycle and rotate it
+                    self.image = pygame.transform.rotate(self.images[self.index], self.vel*-2)
+        else:
+            self.image = pygame.transform.rotate(self.images[self.index],-90)
+
+
+class Pipe(pygame.sprite.Sprite):
+    def __init__(self,x,y,pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("gamedev/flappybird/img/pipe.png")
+        if pos ==  1:
+            self.image = pygame.transform.flip(self.image,False,True)
+            self.rect = self.image.get_rect(bottomleft=(x,y - PIPE_GAP //2))
+        else:
+            self.rect = self.image.get_rect(topleft=(x,y + PIPE_GAP //2))
