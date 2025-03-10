@@ -4,7 +4,7 @@ FPS = 60
 W, H = 700, 450
 WHITE=(255,255,255)
 screen = pygame.display.set_mode((W, H))
-pygame.display.set_caption("Flappy Bird").
+pygame.display.set_caption("Flappy Bird")
 font = pygame.font.SysFont("Bauhaus 93',60")
 
 #loading images
@@ -56,7 +56,7 @@ class Bird(pygame.sprite.Sprite):
             if not pygame.mouse.get_pressed()[0]:
                 self.clicked = False
             self.counter += 1
-            if self.counter > 5
+            if self.counter > 5:
                     self.counter = 0
                     self.index = (self.index + 1) % len(self.images)         #create a cycle and rotate it
                     self.image = pygame.transform.rotate(self.images[self.index], self.vel*-2)
@@ -73,3 +73,29 @@ class Pipe(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(bottomleft=(x,y - PIPE_GAP //2))
         else:
             self.rect = self.image.get_rect(topleft=(x,y + PIPE_GAP //2))
+    
+    def update(self):
+        self.rect.x -= SCROLL_SPEED
+        if self.rect.right<0:
+            self.kill()
+
+
+class Button():
+    def __init__(self,x,y,image):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x,y)
+    
+    def draw(self):
+        action = False
+        # to get button position
+        pos= pygame.mouse.get_pos()
+        if self.rect.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1:
+                action = True
+        #used to draw or write smt
+        screen.blit(self.image,(self.rect.x,self.rect.y))
+        return action
+        
+bird_group = pygame.sprite.Group()
+pipe_group = pygame.sprite.Group()
