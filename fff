@@ -1,0 +1,36 @@
+from tkinter import *
+import calendar
+
+def showCal():
+    new=Tk()
+    new.config(background="white")
+    new.title("CALENDAR")
+    new.geometry("600x700")
+    fetch_year=int(year_field.get())
+    cal_cont = calendar.calendar(fetch_year)
+    cal_year = Label(new,text=cal_cont,font="Consolas 10 bold")
+    cal_year.grid(row=5,column=1,padx=20)
+    new.mainloop()
+
+
+if __name__=="__main__":          #driver code/main code 
+
+
+
+    root = Tk()
+    root.geometry("500x500")
+    cal = Label(root,text="Calendar")
+    year = Label(root,text="Year")
+    year_field = Entry(root)
+    show = Button(root,text="Show",fg="purple",bg="red",command=showCal)
+    exit = Button(root,text="Exit",fg="blue",bg="pink",command=exit)
+
+
+#placing widgets
+    root.title("CALENDAR")
+    cal.grid(row=1,column=5)
+    year.grid(row=2,column=5)
+    year_field.grid(row=3,column=5)
+    show.grid(row=4,column=5)
+    exit.grid(row=5,column=5)
+    root.mainloop()
